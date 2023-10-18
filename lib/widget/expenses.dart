@@ -39,6 +39,9 @@ class _ExpensesState extends State<Expenses> {
           ],
         ),
         body: Column(children: [
+          SizedBox(
+            height: 10,
+          ),
           const Text("The chart"),
           Expanded(child: ExpensesList(expenses: _registerExpenses))
         ]));
