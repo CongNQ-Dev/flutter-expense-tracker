@@ -11,6 +11,7 @@ class NewExpense extends StatefulWidget {
 class _NewExpenseState extends State<NewExpense> {
   final _titleController = TextEditingController();
   final _amountController = TextEditingController();
+  Category _selectedCategory = Category.food;
   DateTime? _selectedDate;
   void _presentDatePicker() async {
     final now = DateTime.now();
@@ -80,13 +81,26 @@ class _NewExpenseState extends State<NewExpense> {
               ),
             )
           ]),
+          const SizedBox(height: 16),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              DropdownButton(
+                  value: _selectedCategory,
+                  items: Category.values
+                      .map((category) => DropdownMenuItem(
+                          value: category,
+                          child: Text(category.name.toUpperCase())))
+                      .toList(),
+                  onChanged: (value) {
+                    setState(() {
+                      _selectedCategory = value!;
+                    });
+                  }),
+              const Spacer(),
               TextButton(
                   style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(
-                          Color.fromARGB(40, 104, 100, 100)),
+                          Color.fromRGBO(104, 100, 100, 0.157)),
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(18.0),
