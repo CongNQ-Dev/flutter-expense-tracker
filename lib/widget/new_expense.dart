@@ -75,78 +75,85 @@ class _NewExpenseState extends State<NewExpense> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 30, 16, 16),
-      child: Column(
-        children: [
-          TextField(
-            controller: _titleController,
-            keyboardType: TextInputType.text,
-            maxLength: 50,
-            decoration: InputDecoration(label: Text("Title")),
-          ),
-          Row(children: [
-            Expanded(
-              child: TextField(
-                controller: _amountController,
-                keyboardType: TextInputType.number,
+    final keyboardSpace = MediaQuery.of(context).viewInsets.bottom;
+    return SizedBox(
+      height: double.infinity,
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.fromLTRB(16, 48, 16, keyboardSpace),
+          child: Column(
+            children: [
+              TextField(
+                controller: _titleController,
+                keyboardType: TextInputType.text,
                 maxLength: 50,
-                decoration:
-                    InputDecoration(prefixText: "\$", label: Text("Amount")),
+                decoration: InputDecoration(label: Text("Title")),
               ),
-            ),
-            const SizedBox(
-              width: 16,
-            ),
-            Expanded(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.center,
+              Row(children: [
+                Expanded(
+                  child: TextField(
+                    controller: _amountController,
+                    keyboardType: TextInputType.number,
+                    maxLength: 50,
+                    decoration: InputDecoration(
+                        prefixText: "\$", label: Text("Amount")),
+                  ),
+                ),
+                const SizedBox(
+                  width: 16,
+                ),
+                Expanded(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(_selectedDate == null
+                          ? "No date selected"
+                          : formatter.format(_selectedDate!)),
+                      IconButton(
+                          onPressed: _presentDatePicker,
+                          icon: Icon(Icons.calendar_month))
+                    ],
+                  ),
+                )
+              ]),
+              const SizedBox(height: 16),
+              Row(
                 children: [
-                  Text(_selectedDate == null
-                      ? "No date selected"
-                      : formatter.format(_selectedDate!)),
-                  IconButton(
-                      onPressed: _presentDatePicker,
-                      icon: Icon(Icons.calendar_month))
+                  DropdownButton(
+                      value: _selectedCategory,
+                      items: Category.values
+                          .map((category) => DropdownMenuItem(
+                              value: category,
+                              child: Text(category.name.toUpperCase())))
+                          .toList(),
+                      onChanged: (value) {
+                        setState(() {
+                          _selectedCategory = value!;
+                        });
+                      }),
+                  const Spacer(),
+                  TextButton(
+                      style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(
+                              Color.fromRGBO(104, 100, 100, 0.157)),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(18.0),
+                          ))),
+                      onPressed: _submitExpenseData,
+                      child: Text("Save Expense")),
+                  TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: Text("Cancel")),
                 ],
               ),
-            )
-          ]),
-          const SizedBox(height: 16),
-          Row(
-            children: [
-              DropdownButton(
-                  value: _selectedCategory,
-                  items: Category.values
-                      .map((category) => DropdownMenuItem(
-                          value: category,
-                          child: Text(category.name.toUpperCase())))
-                      .toList(),
-                  onChanged: (value) {
-                    setState(() {
-                      _selectedCategory = value!;
-                    });
-                  }),
-              const Spacer(),
-              TextButton(
-                  style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(
-                          Color.fromRGBO(104, 100, 100, 0.157)),
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(18.0),
-                      ))),
-                  onPressed: _submitExpenseData,
-                  child: Text("Save Expense")),
-              TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: Text("Cancel")),
             ],
           ),
-        ],
+        ),
       ),
     );
   }
