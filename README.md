@@ -10,7 +10,8 @@
     <img src="https://github.com/CongNQ-Dev/flutter_expense_tracker/assets/81226321/61004a8b-6fd8-4f48-bfc3-4ce259b2d73b" alt="screenshot" width="300"/>
   <img src="https://github.com/CongNQ-Dev/flutter_expense_tracker/assets/81226321/d20f3ee3-1ac4-4e41-bd0b-f854d4fdc6fd" alt="screenshot" width="600"/>
  </tr>
- 
+ <br/>
+ <br/>
    
     
 **ANDROI** 
