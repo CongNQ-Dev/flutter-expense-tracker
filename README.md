@@ -1,4 +1,5 @@
 #Expense Tracker
+- Input Validation
 - Responsive 
 - Adapt to IOS and Androi
  
