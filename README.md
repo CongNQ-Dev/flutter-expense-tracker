@@ -12,5 +12,6 @@
  <br/>
     <img src="https://github.com/CongNQ-Dev/flutter_expense_tracker/assets/81226321/d20f3ee3-1ac4-4e41-bd0b-f854d4fdc6fd" alt="Ảnh 3" width="600"/>
  
-**ANDROI**
+**ANDROI** 
+ <br/>
 <img width="600" alt="Screenshot 2023-12-23 at 21 37 46" src="https://github.com/CongNQ-Dev/flutter_expense_tracker/assets/81226321/094e946f-38c1-41c8-bd82-d19e32c82f2b">
